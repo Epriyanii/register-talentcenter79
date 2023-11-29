@@ -84,9 +84,15 @@ class RegisterController extends Controller
         ];
     
         $this->validate($request, $message, $customMessages);
+
+        //redirect to index
+        return redirect()->route('register')->with(['success' => 'Berhasil mendaftarkan user.']);
         
-        return redirect('/register')->with('success', 'Data Anda berhasil disimpan!');
-    
+        /*if ($this) {
+            return redirect()->route('register')->with('success', 'Berhasil mendaftarkan user')->withInput();
+        } else {
+            return redirect()->back()->with('error', 'Terjadi kesalahan server. Silahkan coba kembali.')->withInput();
+        }-->*/
     }
 
 }

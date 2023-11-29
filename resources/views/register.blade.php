@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Register Talent Center 79</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -13,9 +14,16 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('node_modules\flatpickr\dist\flatpickr.min.css') }}">
     <script src="{{ asset('node_modules\flatpickr\dist\flatpickr.min.js') }}"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
 </head>
 <body style="background: rgba(37, 37, 37, 0.40);">
-    <form method="POST" action="{{ route('form.submit') }}" class="center layout button">
+    @if (session('success'))
+    <div class="center" style="width: 30%; height: 100%; padding-left: 20px; padding-right: 20px; padding-top: 10px; padding-bottom: 10px; background: #30A952; border-radius: 5px; overflow: hidden; justify-content: center; align-items: center; gap: 50px; display: inline-flex">
+        <div class="center" style="color: #FDFDFD; font-size: 15px; font-family: Inter; font-weight: 700; word-wrap: break-word">{{ session('success') }}</div>
+    </div>
+    @endif
+    <p></p>
+    <form id="registerForm" method="POST" action="{{ route('register') }}" class="center layout button">
     @csrf
     {{ csrf_field() }}
         <div class="unit">
@@ -62,7 +70,7 @@
                     </div>
                     <div class="form-1">
                         <div class="form-p">
-                            <input id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" value="{{ old('password') }}" class="form-dup @error('password') is-invalid @enderror" type="password" autocomplete="off" placeholder="Password">
+                            <input id="password" name="password" value="{{ old('password') }}" class="form-dup @error('password') is-invalid @enderror" type="password" autocomplete="off" placeholder="Password">
                             @error('password')
                                 <div class="error-message">{{ $message }}</div>
                             @enderror
@@ -196,7 +204,7 @@
                         @enderror
                     </div>
                     <div class="agency-a">
-                        <textarea id="agencyAddress" name="agencyAddress" class="agency-o @error('agencyAddress') is-invalid @enderror" placeholder="Agency Address" value="{{ old('agencyAddress') }}"></textarea>
+                        <textarea id="agencyAddress" name="agencyAddress" value="{{ old('agencyAddress') }}" class="agency-o @error('agencyAddress') is-invalid @enderror" placeholder="Agency Address"></textarea>
                         @error('agencyAddress')
                             <div class="error-message-a">{{ $message }}</div>
                         @enderror
@@ -225,7 +233,8 @@
             <a href="#" style="text-align: center; color: #2C8AD3; font-size: 14px; font-family: Inter; font-weight: 400; word-wrap: break-word">Sign In Here</a>
         </div>
     </form>
-
+    <!--<button id="btn" onclick="pops()">click</button>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/datepicker.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -235,6 +244,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script type="text/javascript" src="JS/main.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script>
         function changeIcon(anchor) {
@@ -362,7 +372,20 @@
         }
     </script>
 
-    @include('sweetalert::alert')
+    <!-- Script untuk menampilkan pesan notifikasi setelah submit form
+    <script>
+
+        const btn = document.getElementById('btn')
+
+        // btn.addEventListener('click',function(){
+        //     toastr["success"]("y7y89w");
+        //     console.log("test")
+        // })
+
+        const pops = () =>{
+            toastr["success"]("y7y89w");
+        }
+    </script> -->
 
 </body>
 </html>
